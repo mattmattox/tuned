@@ -3,7 +3,7 @@
 . /usr/lib/tuned/functions
 
 start() {
-    DRACUT_VER=`dracut --version | sed 's/^.* \([0-9]\+\).*/\1/'`
+    DRACUT_VER=`dracut --version 2>/dev/null | sed 's/^.* \([0-9]\+\).*/\1/'`
     echo "$DRACUT_VER" | grep -q '^[[:digit:]]\+$' || DRACUT_VER="0"
     # https://issues.redhat.com/browse/RHEL-119889
     if [ "$DRACUT_VER" -gt "102" ]
@@ -12,9 +12,9 @@ start() {
     else
       DRACUT_HOOK_DIR="/usr/lib/dracut/hooks/pre-udev"
     fi
-    mkdir -p "${TUNED_tmpdir}/etc/systemd"
+    mkdir -p "${TUNED_tmpdir}/etc/systemd/system.conf.d"
     mkdir -p "${TUNED_tmpdir}${DRACUT_HOOK_DIR}"
-    cp /etc/systemd/system.conf "${TUNED_tmpdir}/etc/systemd/"
+    cp /etc/systemd/system.conf.d/00-tuned.conf "${TUNED_tmpdir}/etc/systemd/system.conf.d/00-tuned.conf"
     cp 00-tuned-pre-udev.sh "${TUNED_tmpdir}${DRACUT_HOOK_DIR}"
     setup_kvm_mod_low_latency
     disable_ksm

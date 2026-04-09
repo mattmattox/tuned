@@ -1,15 +1,17 @@
-:revnumber: 2.24.1
-:revdate: 2024-10-09
+:revnumber: 0.0.0
+:revdate: 2000-01-01
 :keywords: documentation, tuned, performance, power, linux
 :toc:
 
-// The revnumber attribute is intended to show the TuneD version for which the document has been updated
+// The revnumber and revdate attributes are automatically updated during build
 
 [id="{tuned-documentation}"]
 = TuneD documentation: Optimizing system throughput, latency, and power consumption
 
 // Load externally defined attributes
 include::meta/attributes.adoc[]
+
+include::meta/variables.adoc[]
 
 // Set context for all included assemblies
 :context: tuned-documentation
